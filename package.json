@@ -1,0 +1,14 @@
+{
+  "name": "bca-bsc-cs-online-quiz",
+  "version": "1.0.0",
+  "description": "Online quiz platform for BCA and BSc Computer Science students",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "sqlite3": "^5.1.7"
+  }
+}

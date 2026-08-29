@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CS Quiz Arena | BCA & BSc CS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">CS</div>
+      <div><strong>Quiz Arena</strong><span>BCA • BSc Computer Science</span></div>
+    </div>
+    <nav class="tabs">
+      <button class="tab active" data-section="quiz">Quiz</button>
+      <button class="tab" data-section="leaderboard">Leaderboard</button>
+      <button class="tab" data-section="about">About</button>
+    </nav>
+    <div class="status"><span class="dot"></span> Live</div>
+  </header>
+
+  <main>
+    <section id="quiz" class="section active-section">
+      <div class="hero">
+        <div>
+          <p class="eyebrow">BCA / BSc CS ONLINE ASSESSMENT</p>
+          <h1>Test your <span>Computer Science</span> skills.</h1>
+          <p class="subtitle">20 questions covering programming, DBMS, web technology, OS, networks, data structures and software engineering.</p>
+        </div>
+        <div class="hero-card">
+          <div class="big">20</div><span>Questions</span>
+          <div class="big">20</div><span>Marks</span>
+          <div class="big">⏱</div><span>Timed test</span>
+        </div>
+      </div>
+
+      <div id="setupCard" class="card setup">
+        <h2>Start Quiz</h2>
+        <div class="form-grid">
+          <label>Student name
+            <input id="studentName" type="text" placeholder="Enter your full name">
+          </label>
+          <label>Course
+            <select id="course">
+              <option value="BCA">BCA</option>
+              <option value="BSc CS">BSc Computer Science</option>
+            </select>
+          </label>
+        </div>
+        <div class="rules">
+          <div>✓ 1 mark for each correct answer</div>
+          <div>✓ No negative marking</div>
+          <div>⚠ Switching browser tabs triggers a notification and is recorded</div>
+        </div>
+        <button id="startBtn" class="primary">Start Quiz →</button>
+      </div>
+
+      <div id="quizCard" class="card hidden">
+        <div class="quiz-head">
+          <div>
+            <span id="questionNumber" class="pill">Question 1 / 20</span>
+            <h2 id="questionText">Question</h2>
+          </div>
+          <div class="timer"><span>TIME</span><strong id="timer">15:00</strong></div>
+        </div>
+        <div id="options" class="options"></div>
+        <div class="quiz-foot">
+          <span id="progressText">0 answered</span>
+          <button id="nextBtn" class="primary">Next →</button>
+        </div>
+      </div>
+
+      <div id="resultCard" class="card hidden result-card">
+        <div class="result-icon">🏆</div>
+        <h2>Quiz Completed!</h2>
+        <div id="scoreValue" class="score">0 / 20</div>
+        <p id="scoreMessage"></p>
+        <div class="result-actions">
+          <button id="viewLeaderboardBtn" class="primary">View Leaderboard</button>
+          <button id="restartBtn" class="secondary">Try Again</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="leaderboard" class="section">
+      <div class="section-title">
+        <div>
+          <p class="eyebrow">RESULTS DATABASE</p>
+          <h2>Highest & Lowest Scores</h2>
+        </div>
+        <button id="refreshBtn" class="secondary">↻ Refresh</button>
+      </div>
+      <div id="leaders" class="leader-grid"></div>
+      <div class="card table-card">
+        <h3>All Students</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Rank</th><th>Student</th><th>Course</th><th>Correct Answers</th><th>Score</th><th>Percentage</th><th>Tab Switches</th><th>Date</th></tr></thead>
+            <tbody id="leaderTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card table-card winners-card">
+        <div class="violation-title"><div><h3>🏆 Final Winners Result Sheet</h3><p>Only completed, non-violation attempts are eligible for the winners list.</p></div></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Position</th><th>Winner</th><th>Course</th><th>Correct Answers</th><th>Score</th><th>Percentage</th><th>Status</th><th>Date</th></tr></thead>
+            <tbody id="winnersTable"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card table-card violation-card">
+        <div class="violation-title"><div><h3>🚨 Tab-Shift Violations</h3><p>Students who left the quiz tab. A tab shift automatically submits/disqualifies the attempt.</p></div></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Student</th><th>Course</th><th>Score</th><th>Tab Switches</th><th>Status</th><th>Date</th></tr></thead>
+            <tbody id="violationTable"></tbody>
+          </table>
+        </div>
+      </div>    </section>
+
+    <section id="about" class="section">
+      <div class="card about">
+        <p class="eyebrow">ABOUT THE PROJECT</p>
+        <h2>Online Quiz System</h2>
+        <p>This project is designed for BCA and BSc Computer Science students. It uses HTML, CSS and JavaScript for the frontend, Node.js + Express for the backend, and SQLite for persistent results.</p>
+        <div class="feature-grid">
+          <div><b>📚 CS Questions</b><span>Programming, DBMS, DSA, OS, Networks and Web.</span></div>
+          <div><b>👀 Tab Detection</b><span>Browser visibility changes are detected and recorded.</span></div>
+          <div><b>🗄️ Database</b><span>Every submitted result is stored in SQLite.</span></div>
+          <div><b>🏆 Leaderboard</b><span>Highest and lowest scores are shown automatically.</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+  <div id="tabWarning" class="warning hidden">
+    <div class="warning-box">
+      <div class="warning-symbol">⚠</div>
+      <h2>Tab change detected</h2>
+      <p>Please return to the quiz. Your tab switch has been recorded.</p>
+      <button id="returnBtn" class="primary">Return to Quiz</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
